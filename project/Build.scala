@@ -1,5 +1,4 @@
 import Dependencies.{commonDependencies, consumerDependencies, producerDependencies}
-//import com.typesafe.sbt.SbtStartScript
 import sbt.Keys._
 import sbt._
 
