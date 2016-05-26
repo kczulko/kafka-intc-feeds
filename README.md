@@ -2,7 +2,7 @@
 Kafka playgroud with a little demo app playing around reactive-kafka (https://github.com/akka/reactive-kafka)
 
 #### Building
-In project root directory:
+From project root directory:
 ```bash
 sbt assembly
 ```
