@@ -31,6 +31,7 @@ class IntcFeedsConsumer extends Actor with ActorLogging {
     ).withBootstrapServers(kafkaBrokers)
       .withGroupId(UUID.randomUUID().toString)
       .withProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest")
+      .withProperty(ConsumerConfig.RECONNECT_BACKOFF_MS_CONFIG, "5000")
 
     Consumer.committableSource(consumerSettings.withClientId("client1"))
       .runForeach(message => processMessage(message.value))

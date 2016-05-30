@@ -8,6 +8,7 @@ import akka.kafka.ProducerSettings
 import akka.stream._
 import akka.stream.actor.ActorPublisher
 import akka.stream.scaladsl.Source
+import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.common.serialization.ByteArraySerializer
 import org.reactivestreams.Publisher
@@ -35,6 +36,7 @@ private class PublisherStreamCreator extends Actor with ActorLogging {
       new ByteArraySerializer,
       MarketStockMessageSerializer
     ).withBootstrapServers(kafkaBrokers)
+     .withProperty(ConsumerConfig.RECONNECT_BACKOFF_MS_CONFIG, "5000")
 
     val producer = context.actorOf(Props(new IntcFeedsProducer))
     val publisher: Publisher[MarketStockMessage] = ActorPublisher[MarketStockMessage](producer)
